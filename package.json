@@ -13,9 +13,12 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@vicons/ionicons5": "^0.12.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "naive-ui": "^2.34.3",
     "sass": "^1.58.0",
+    "unplugin-auto-import": "^0.13.0",
+    "unplugin-vue-components": "^0.23.0",
     "vfonts": "^0.0.3",
     "vite": "^4.0.0"
   }

@@ -2,17 +2,25 @@
     <div class="bg">
         <div class="bg-form">
             <h3 class="title">某个后台管理系统</h3>
-            <n-form ref="formRef" :label-width="80" :model="user" :rules="rules" :size="size">
-                <n-form-item path="user.name">
+            <n-form ref="formRef" label-placement="left" label-width="auto" :label-width="80" :model="user"
+                :rules="rules" :size="size">
+                <n-form-item path="name">
                     <n-input v-model:value="user.name" placeholder="输入账号">
-                        
+                        <template #prefix>
+                            <img src="@/assets/icons/user.svg" alt="账户" class="input-icon" />
+                        </template>
                     </n-input>
                 </n-form-item>
-                <n-form-item path="user.age">
-                    <n-input v-model:value="user.password" type="password" show-password-on="mousedown" placeholder="输入密码" />
+                <n-form-item path="password">
+                    <n-input v-model:value="user.password" type="password" show-password-on="mousedown"
+                        placeholder="输入密码">
+                        <template #prefix>
+                            <img src="@/assets/icons/password.svg" alt="账户" class="input-icon" />
+                        </template>
+                    </n-input>
                 </n-form-item>
                 <n-form-item>
-                    <n-button attr-type="button" @click="handleValidateLogin">
+                    <n-button type="primary" attr-type="button" style="width: 100%;" @click="handleValidateLogin">
                         登录
                     </n-button>
                 </n-form-item>
@@ -23,14 +31,15 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-import { NForm, NFormItem, NButton, NInput } from 'naive-ui';
+import { useRouter } from "vue-router"
+// import { NForm, NFormItem, NButton, NInput } from 'naive-ui'
 /* 
     登录逻辑
 */
 const size = ref("medium");
 const user = reactive({
     name: "admin",
-    password: "123456"
+    password: ""
 })
 const rules = {
     name: {
@@ -38,15 +47,24 @@ const rules = {
         message: "请输入账号",
         trigger: "blur"
     },
-    age: {
+    password: {
         required: true,
         message: "请输入密码",
         trigger: ["input", "blur"]
     }
 }
+const $router = useRouter();
+const formRef = ref();
+function handleValidateLogin(e) {
+    e.preventDefault();
+    formRef.value?.validate((errors) => {
+        if (!errors) {
+            $router.push({
+                path: "layout"
+            });
+        }
+    })
 
-function handleValidateLogin() {
-    console.log(formValue);
 }
 </script>
 
@@ -68,14 +86,22 @@ function handleValidateLogin() {
     display: flex;
     align-items: center;
     justify-content: center;
+
     &-form {
         border-radius: 6px;
         background-color: #fff;
         width: 400px;
         padding: 25px 25px 5px 25px;
+
         .title {
             text-align: center;
             color: #707070;
+            margin: 0 auto 30px auto;
+        }
+
+        .input-icon {
+            margin-right: 5px;
+            margin-left: 0px;
         }
     }
 }

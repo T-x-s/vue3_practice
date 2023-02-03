@@ -1,12 +1,23 @@
 <template>
-    <div>layout</div>
-    <n-button>Default</n-button>
-    <n-button type="primary">Default</n-button>
+    <n-layout has-sider>
+        <n-layout-sider bordered>
+            <Menu></Menu>
+        </n-layout-sider>
+        <n-layout>
+            <n-layout-header bordered >
+                <Header></Header>
+            </n-layout-header>
+            <n-layout-content bordered>
+                <Content></Content>
+            </n-layout-content>
+        </n-layout>
+    </n-layout>
 </template>
 
 <script setup>
-import { NButton } from "naive-ui"
+import Menu from "./Menu/index.vue"
+import Header from "./Header/index.vue"
+import Content from "./Content/index.vue"
 </script>
 <style lang='scss' scoped>
-
 </style>
