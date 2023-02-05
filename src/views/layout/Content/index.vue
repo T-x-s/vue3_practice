@@ -1,9 +1,10 @@
 <template>
-    <h2>内容</h2>
+    <div class="content">
+        <div v-for="item in 100" :key="item">{{ item }}</div>
+    </div>
 </template>
 <script setup>
 
 </script>
 <style lang='scss' scoped>
-
 </style>
