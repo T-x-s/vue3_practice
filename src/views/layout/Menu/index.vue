@@ -1,48 +1,40 @@
 <template>
-    <n-menu :options="menuOptions" @update:value="handleUpdateValue" />
+    <div class="menu">
+        <div class="menu-logo">
+            <img src="@/assets/icons/vue.svg" alt="logo" class="icon">
+            <span v-show="!isCollapse">Naive-Admin</span>
+        </div>
+        <div class="menu-content">
+            <n-menu :options="menuOptions" :collapsed="isCollapse" :collapsed-width="48" :collapsed-icon-size="24"
+                @update:value="handleUpdateValue" />
+        </div>
+    </div>
 </template>
 <script setup>
-import { h } from "vue";
+import { h, ref } from "vue";
 import { NIcon, useMessage } from "naive-ui";
 import { RouterLink } from "vue-router";
-// import {
-//     BookOutline as BookIcon,
-//     PersonOutline as PersonIcon,
-//     WineOutline as WineIcon,
-//     HomeOutline as HomeIcon
-// } from "@vicons/ionicons5";
+import {
+    BookOutline as BookIcon,
+    PersonOutline as PersonIcon,
+    WineOutline as WineIcon,
+    HomeOutline as HomeIcon
+} from "@vicons/ionicons5";
 
-// function renderIcon(icon) {
-//     return () => h(NIcon, null, { default: () => h(icon) });
-// }
+const props = defineProps({
+    isCollapse: Boolean
+})
+
+function renderIcon(icon) {
+    return () => h(NIcon, null, { default: () => h(icon) });
+}
 
 const menuOptions = [
     {
-        // label: () => h(
-        //     RouterLink,
-        //     {
-        //         to: {
-        //             name: "home",
-        //             params: {
-        //                 lang: "zh-CN"
-        //             }
-        //         }
-        //     },
-        //     { default: () => "回家" }
-        // ),
         label: "logo",
         key: "go-back-home",
-        // icon: renderIcon(HomeIcon)
+        icon: renderIcon(HomeIcon)
     },
-    // {
-    //     key: "divider-1",
-    //     type: "divider",
-    //     props: {
-    //         style: {
-    //             marginLeft: "32px"
-    //         }
-    //     }
-    // },
     {
         label: () => h(
             "a",
@@ -54,13 +46,12 @@ const menuOptions = [
             "且听风吟"
         ),
         key: "hear-the-wind-sing",
-        // icon: renderIcon(BookIcon)
+        icon: renderIcon(BookIcon)
     },
     {
         label: "1973年的弹珠玩具",
         key: "pinball-1973",
-        // icon: renderIcon(BookIcon),
-        // disabled: true,
+        icon: renderIcon(BookIcon),
         children: [
             {
                 label: "鼠",
@@ -71,13 +62,12 @@ const menuOptions = [
     {
         label: "寻羊冒险记",
         key: "a-wild-sheep-chase",
-        // icon: renderIcon(BookIcon),
-        // disabled: true
+        icon: renderIcon(BookIcon),
     },
     {
         label: "舞，舞，舞",
         key: "dance-dance-dance",
-        // icon: renderIcon(BookIcon),
+        icon: renderIcon(BookIcon),
         children: [
             {
                 type: "group",
@@ -87,12 +77,12 @@ const menuOptions = [
                     {
                         label: "叙事者",
                         key: "narrator",
-                        // icon: renderIcon(PersonIcon)
+                        icon: renderIcon(PersonIcon)
                     },
                     {
                         label: "羊男",
                         key: "sheep-man",
-                        // icon: renderIcon(PersonIcon)
+                        icon: renderIcon(PersonIcon)
                     }
                 ]
             },
@@ -126,11 +116,36 @@ const menuOptions = [
 ];
 
 function handleUpdateValue(key, item) {
-    // window.$message.info("[onUpdate:value]: " + JSON.stringify(key));
-    // window.$message.info("[onUpdate:value]: " + JSON.stringify(item));
+    window.$message.info("[onUpdate:value]: " + JSON.stringify(key));
+    window.$message.info("[onUpdate:value]: " + JSON.stringify(item));
 }
 
+let collapsed = ref(false)
 </script>
 <style lang='scss' scoped>
+.menu {
+    height: 100vh;
 
+    &-logo {
+        height: 50px;
+        border-bottom: solid 1px var(--n-border-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .icon {
+            width: 36px;
+            height: 36px;
+        }
+
+        span {
+            font-weight: 700;
+            font-size: 18px;
+            opacity: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+    }
+}
 </style>
