@@ -61,11 +61,10 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useFullscreen } from '@vueuse/core';
-// import { useDialog } from "naive-ui"
+import { NDialogProvider, useDialog, useMessage } from 'naive-ui';
 import Hamburger from "@/components/Hamburger/index.vue"
 const emits = defineEmits(['changeCollapse'])
-const router = useRouter();
-// const dialog = useDialog()
+
 /* github跳转 */
 function handleJump() {
     window.open("https://github.com/T-x-s/vue3_practice");
@@ -79,6 +78,8 @@ function handleFold() {
 }
 
 /* 头像设置 */
+const dialog = useDialog()
+const router = useRouter();
 const options = [
     {
         label: "个人设置",
@@ -104,7 +105,6 @@ function handleLogout() {
     })
 }
 const handleSelect = (key) => {
-    console.log(key);
     switch (key) {
         case 1:
             router.push('/');
