@@ -29,10 +29,9 @@
     </div>
 </template>
 
-<script setup>
+<script setup name="login">
 import { ref, reactive } from 'vue';
-import { useRouter } from "vue-router"
-// import { NForm, NFormItem, NButton, NInput } from 'naive-ui'
+import { useRouter } from "vue-router";
 /* 
     登录逻辑
 */

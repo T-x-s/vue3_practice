@@ -5,7 +5,7 @@
             <span v-show="!isCollapse">Naive-Admin</span>
         </div>
         <div class="menu-content">
-            <n-menu :options="menuOptions" :collapsed="isCollapse" :collapsed-width="48" :collapsed-icon-size="24"
+            <n-menu :options="menuOptions" :collapsed="isCollapse" :collapsed-width="48" :root-indent="18" :collapsed-icon-size="24"
                 @update:value="handleUpdateValue" />
         </div>
     </div>

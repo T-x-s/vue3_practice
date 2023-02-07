@@ -46,39 +46,75 @@
                 </template>
                 <span>布局</span>
             </n-tooltip>
-            <n-tooltip placement="bottom" trigger="hover">
-                <template #trigger>
-                    <div class="avatar right-item">
-                        <div class="avatar-wrapper">
-                            <img src="@/assets/images/avatar.jpg" alt="头像" class="use-avatar">
-                            <i class="icon-caret-bottom"></i>
-                        </div>
+            <n-dropdown trigger="hover" :options="options" @select="handleSelect">
+                <div class="avatar right-item">
+                    <div class="avatar-wrapper">
+                        <img src="@/assets/images/avatar.jpg" alt="头像" class="use-avatar">
+                        <i class="icon-caret-bottom"></i>
                     </div>
-                </template>
-                <span>个人中心</span>
-            </n-tooltip>
-
+                </div>
+            </n-dropdown>
         </div>
     </div>
 </template>
 <script setup>
-import { ref } from "vue"
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { useFullscreen } from '@vueuse/core';
+// import { useDialog } from "naive-ui"
 import Hamburger from "@/components/Hamburger/index.vue"
 const emits = defineEmits(['changeCollapse'])
+const router = useRouter();
+// const dialog = useDialog()
 /* github跳转 */
 function handleJump() {
     window.open("https://github.com/T-x-s/vue3_practice");
 }
 /* 缩放 */
 const { isFullscreen, toggle } = useFullscreen();
-
 let collapsed = ref(false);
-
 function handleFold() {
     collapsed.value = !collapsed.value;
     emits('changeCollapse', collapsed);
 }
+
+/* 头像设置 */
+const options = [
+    {
+        label: "个人设置",
+        key: 1
+    },
+    {
+        label: "退出登录",
+        key: 2
+    }
+]
+function handleLogout() {
+    dialog.warning({
+        title: '警告',
+        content: '您确定要退出登录吗？',
+        positiveText: '确定',
+        negativeText: '取消',
+        onPositiveClick: () => {
+            router.push('/');
+        },
+        onNegativeClick: () => {
+            message.error('取消')
+        }
+    })
+}
+const handleSelect = (key) => {
+    console.log(key);
+    switch (key) {
+        case 1:
+            router.push('/');
+            break;
+        case 2:
+            handleLogout();
+            break;
+    }
+}
+
 </script>
 <style lang='scss' scoped>
 .header {
