@@ -59,7 +59,7 @@ function handleValidateLogin(e) {
     formRef.value?.validate((errors) => {
         if (!errors) {
             $router.push({
-                path: "layout"
+                path: "dashboard"
             });
         }
     })

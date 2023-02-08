@@ -77,9 +77,10 @@ function handleFold() {
     emits('changeCollapse', collapsed);
 }
 
-/* 头像设置 */
+/* 头像区 */
 const dialog = useDialog()
 const router = useRouter();
+const message = useMessage();
 const options = [
     {
         label: "个人设置",
@@ -91,7 +92,7 @@ const options = [
     }
 ]
 function handleLogout() {
-    dialog.warning({
+    dialog.info({
         title: '警告',
         content: '您确定要退出登录吗？',
         positiveText: '确定',
@@ -100,7 +101,7 @@ function handleLogout() {
             router.push('/');
         },
         onNegativeClick: () => {
-            message.error('取消')
+            message.info('取消退出登录')
         }
     })
 }
@@ -121,6 +122,7 @@ const handleSelect = (key) => {
     display: flex;
     justify-content: space-between;
     height: 49px;
+    box-shadow: 0 1px 4px #00152914;
 
     &-left {
         display: flex;
