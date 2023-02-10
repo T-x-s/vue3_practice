@@ -20,7 +20,7 @@
                     </n-input>
                 </n-form-item>
                 <n-form-item>
-                    <n-button type="primary" attr-type="button" style="width: 100%;" @click="handleValidateLogin">
+                    <n-button type="primary" attr-type="button" style="width: 100%;" @click.prevent="handleValidateLogin">
                         登录
                     </n-button>
                 </n-form-item>
@@ -54,8 +54,7 @@ const rules = {
 }
 const $router = useRouter();
 const formRef = ref();
-function handleValidateLogin(e) {
-    e.preventDefault();
+function handleValidateLogin() {
     formRef.value?.validate((errors) => {
         if (!errors) {
             $router.push({
