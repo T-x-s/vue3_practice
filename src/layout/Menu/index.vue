@@ -53,13 +53,25 @@ const menuOptions = [
                     RouterLink,
                     {
                         to: {
-                            path: '/file'
+                            path: '/file/file1'
                         }
                     },
                     { default: () => "Vue文档" }
                 ),
                 key: "Vue"
-            }
+            },
+            {
+                label: () => h(
+                    RouterLink,
+                    {
+                        to: {
+                            path: '/file/file2'
+                        }
+                    },
+                    { default: () => "React文档" }
+                ),
+                key: "React"
+            },
         ]
     }
 ];

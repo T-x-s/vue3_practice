@@ -21,13 +21,14 @@ const router = createRouter({
             component: () => import('@/views/error/401.vue'),
           },
         {
-            path: '/dashboard',
+            path: '',
             component: Layout,
+            redirect: '/dashboard',
             children: [
                 {
                     path: '/dashboard',
                     component: () => import('@/views/dashboard/index.vue'),
-                    name: 'Index'
+                    name: 'Dashboard'
                 }
             ]
         },
@@ -36,9 +37,15 @@ const router = createRouter({
             component: Layout,
             children: [
                 {
-                    path: '/file',
-                    component: () => import('@/views/file/index.vue'),
-                    name: 'File'
+                    path: '/file/file1/:id',
+                    component: () => import('@/views/file/file1/index.vue'),
+                    name: 'File1',
+                    props: true
+                },
+                {
+                    path: '/file/file2',
+                    component: () => import('@/views/file/file2/index.vue'),
+                    name: 'File2'
                 }
             ]
         }

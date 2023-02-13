@@ -1,22 +1,29 @@
 <template>
     <h3>dashboard</h3>
-    <h3>{{ a }}</h3>
-    <n-button type="primary" @clcik="changeRoute(),a++">点击跳转</n-button>
+    <n-button type="primary" @click="handleRoute">点击跳转</n-button>
 </template>
-<script>
-export default {
-    data() {
-        return {
-            a: 1
+<script setup>
+// import { ref } from "vue"
+import { useRouter,useRoute } from "vue-router"
+const router = useRouter();
+const route = useRoute();
+function handleRoute() {
+    // router.push(`/file/${123}`)
+    // router.push({
+    //     path: `/file/${234}`
+    // })
+    // router.push({
+    //     name: 'File',
+    //     params: {
+    //         id: 123
+    //     }
+    // })
+    router.push({
+        path: '/file/file1',
+        query: {
+            id: '111'
         }
-    },
-    methods: {
-        changeRoute() {
-            console.log(this);
-            console.log(111);
-            // this.$router.push('/file')
-        }
-    }
+    })
 }
 </script>
 <style lang='scss' scoped>
